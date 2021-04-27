@@ -69,10 +69,14 @@ const HourlyNavigation = () => {
 
 const TabNavigator = createBottomTabNavigator();
 
-export const Tabs = () => {
+export const MainNavigator = () => {
     return(
         <TabNavigator.Navigator
             lazy={true}
+            tabBarOptions={{
+                activeTintColor: Colors.red,
+                inactiveTintColor: 'gray'
+            }}
         >
             <TabNavigator.Screen
                 name="City"
@@ -81,12 +85,12 @@ export const Tabs = () => {
                     tabBarIcon: tabInfo => (
                         <Ionicons name='home' size={24} color={tabInfo.color}/>
                     ),
-                    activeTintColor: Colors.red
+                    tabBarLabel:'City',
                 }}
-                tabBarOptions={{
-                    activeTintColor: Colors.red,
-                    inactiveTintColor: 'gray'
-                }}
+                // tabBarOptions={{
+                //     activeTintColor: Colors.red,
+                //     inactiveTintColor: 'gray'
+                // }}
             />
             <TabNavigator.Screen
                 name="DailyScreen"
@@ -97,10 +101,6 @@ export const Tabs = () => {
                     ),
                     tabBarLabel:'Daily'
                 }}
-                tabBarOptions={{
-                    activeTintColor: Colors.red,
-                    inactiveTintColor: 'gray'
-                }}
             />
             <TabNavigator.Screen
                 name="HourlyScreen"
@@ -110,10 +110,6 @@ export const Tabs = () => {
                         <Ionicons name='time' size={24} color={tabInfo.color} />
                     ),
                     tabBarLabel:'Hourly'
-                }}
-                tabBarOptions={{
-                    activeTintColor: Colors.red,
-                    inactiveTintColor: 'gray'
                 }}
             />
         </TabNavigator.Navigator>
