@@ -1,4 +1,3 @@
-import { cityReducer} from "./cityReducer";
-import { locationReducer} from "./locationReducer";
+import mainReducer from "./mainReducer";
 
-export { cityReducer, locationReducer};
+export { mainReducer };

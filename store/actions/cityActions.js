@@ -16,6 +16,7 @@ export const getDefaultCity = () => {
             const response = await fetch(`${URL}/weather?id=${city.id}$appid=${APPID}`);
             const fetchCity = await response.json();
             city.push(fetchCity);
+            //Need to search there...
         }
         dispatch({
             type: CITIES.SET_CITIES_WEATHER,

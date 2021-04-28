@@ -1,13 +1,12 @@
 import React from 'react';
-import { Text, View, StyleSheet} from 'react-native';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import CityScreenView from '../screens/firstTab/CityScreen/CityScreenView';
-import CityDetails from '../screens/firstTab/CityDetails/CityDetails';
-import DailyScreen from '../screens/secondTab/DailyScreen';
-import HourlyScreen from '../screens/thirdTab/HourlyScreen';
+import { CityScreen, CityDetails } from '../screens/firstTab'
+import { DailyScreen } from '../screens/secondTab';
+import { HourlyScreen } from '../screens/thirdTab';
 import Colors from '../constants/colors';
 
 
@@ -27,7 +26,7 @@ const CityNavigation = () => {
             >
             <CityStackNavigation.Screen
                 name="CityScreen"
-                component={CityScreenView}
+                component={CityScreen}
             />
             <CityStackNavigation.Screen
                 name="CityDetails"
@@ -87,10 +86,6 @@ export const MainNavigator = () => {
                     ),
                     tabBarLabel:'City',
                 }}
-                // tabBarOptions={{
-                //     activeTintColor: Colors.red,
-                //     inactiveTintColor: 'gray'
-                // }}
             />
             <TabNavigator.Screen
                 name="DailyScreen"

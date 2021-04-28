@@ -1,5 +1,3 @@
-
-
 export const convertDateFromUTC = utcDate => {
     return new Date(utcDate * 1000);
 }

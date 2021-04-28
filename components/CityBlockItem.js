@@ -4,25 +4,24 @@ import {
     View,
     StyleSheet
 } from 'react-native';
-import { Icon } from 'react-native-elements';
 
-import TouchableComponent from './ui/TouchableComponent';
-import Block from '../components/Block';
+import { TouchableComponent, CityWeatherIcon } from './ui';
+import { Block } from '../components';
 import Colors from '../constants/colors';
-import {toTempFormatter} from "../constants/utils";
+import { toTempFormatter } from "../constants/utils";
 
 const CityBlockItem = ({city, onSelect, ...props}) => {
     return(
         <Block style={styles.block}>
             <View style={styles.touchable}>
+                {/*<TouchableComponent onPress={() => ({})}>*/}
                 <TouchableComponent onPress={() => onSelect(city)}>
                     <View>
                         <View style={styles.title}>
                             <Text style={styles.titleText}>{city.name}</Text>
                         </View>
                         <View style={styles.weatherContainer}>
-                            {/*<WeatherIcon iconName={city.weather[0].icon} />*/}
-                            <Icon name='weather' />
+                            <CityWeatherIcon iconName={city.weather[0].icon} />
                             <View style={styles.temp}>
                                 <Text>{toTempFormatter(city.main.temp)} С</Text>
                             </View>
@@ -46,6 +45,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10
+    },
+    weather: {
+        paddingVertical: 5
     },
     temp: {
         paddingVertical: 5

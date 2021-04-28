@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import {Text, View, StyleSheet, FlatList, Button, ActivityIndicator} from 'react-native';
 
-import InputContainer from '../../../components/InputContainer';
-import CityBlockItem from '../../../components/CityBlockItem';
+import { CityBlockItem, InputContainer } from '../../../components';
 import Colors from '../../../constants/colors';
 
 const CityScreenView = (props) => {
@@ -55,8 +54,8 @@ const CityScreenView = (props) => {
                 data={citiesWeather}
                 keyExtractor={item => item.id + ''}
                 numColumns={2}
-                renderItem={itemData => <CityBlockItem city={itemData.item} onSelect={props} />}
-                refreshing={false}
+                renderItem={itemData => <CityBlockItem city={itemData.item} onSelect={ () => ({}) } />}
+                refreshing={isLoading}
                 onRefresh={() => loadCities()}
             />
         </View>

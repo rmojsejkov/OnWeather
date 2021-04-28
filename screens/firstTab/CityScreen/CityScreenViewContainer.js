@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { cityActions, locationActions } from '../../../store';
+import { cityActions, locationActions } from '../../../store/actions';
 import CityScreenView from './CityScreenView';
 
 const CityScreenContainer = ({navigation, ...props}) => {
@@ -41,7 +41,6 @@ const CityScreenContainer = ({navigation, ...props}) => {
     }, [loadCities]);
 
     useEffect(() => {
-
         return navigation.dangerouslyGetParent()
             .addListener('focus', () => {
                 loadCities();
