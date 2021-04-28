@@ -4,8 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import CityScreen from '../screens/firstTab/CityScreen';
-import CityDetails from '../screens/firstTab/CityDetails';
+import CityScreenView from '../screens/firstTab/CityScreen/CityScreenView';
+import CityDetails from '../screens/firstTab/CityDetails/CityDetails';
 import DailyScreen from '../screens/secondTab/DailyScreen';
 import HourlyScreen from '../screens/thirdTab/HourlyScreen';
 import Colors from '../constants/colors';
@@ -27,7 +27,7 @@ const CityNavigation = () => {
             >
             <CityStackNavigation.Screen
                 name="CityScreen"
-                component={CityScreen}
+                component={CityScreenView}
             />
             <CityStackNavigation.Screen
                 name="CityDetails"

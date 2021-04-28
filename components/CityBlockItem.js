@@ -9,6 +9,7 @@ import { Icon } from 'react-native-elements';
 import TouchableComponent from './ui/TouchableComponent';
 import Block from '../components/Block';
 import Colors from '../constants/colors';
+import {toTempFormatter} from "../constants/utils";
 
 const CityBlockItem = ({city, onSelect, ...props}) => {
     return(
@@ -17,15 +18,13 @@ const CityBlockItem = ({city, onSelect, ...props}) => {
                 <TouchableComponent onPress={() => onSelect(city)}>
                     <View>
                         <View style={styles.title}>
-                            <Text style={styles.titleText}>cityName</Text>
-                            {/*<Text style={styles.titleText}>{city.name}</Text>*/}
+                            <Text style={styles.titleText}>{city.name}</Text>
                         </View>
                         <View style={styles.weatherContainer}>
                             {/*<WeatherIcon iconName={city.weather[0].icon} />*/}
                             <Icon name='weather' />
                             <View style={styles.temp}>
-                                {/*<Text>{toTempFormatter(city.main.temp)} С</Text>*/}
-                                <Text> C</Text>
+                                <Text>{toTempFormatter(city.main.temp)} С</Text>
                             </View>
                         </View>
                     </View>
