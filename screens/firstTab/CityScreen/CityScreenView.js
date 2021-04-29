@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, FlatList, Button, ActivityIndicator} from 'react
 
 import { CityBlockItem, InputContainer } from '../../../components';
 import Colors from '../../../constants/colors';
+import { Icon } from "react-native-elements";
 
 const CityScreenView = (props) => {
 
@@ -11,7 +12,12 @@ const CityScreenView = (props) => {
         navigation,
         citiesWeather,
         isLoading,
-        loadCities
+        loadCities,
+        cityInputValue,
+        textHandler,
+        searchedCity,
+        fetchCityWeatherByName,
+        isSearching
     } = props;
 
     navigation.setOptions = () => {
@@ -21,8 +27,7 @@ const CityScreenView = (props) => {
         navigation.setOptions({
             headerTitle: () => {
                 return (
-                    <InputContainer />
-                    // <SearchInput value={cityInputValue} onChangeText={textHandler} />
+                    <InputContainer value={cityInputValue}  onChangeText={textHandler} />
                 );
             }
         });
@@ -47,6 +52,38 @@ const CityScreenView = (props) => {
         )
     }
 
+    if (isSearching && cityInputValue.trim().length > 3) {
+        if (searchedCity.length === 0) {
+            return (
+                <View style={styles.notFoundScreen}>
+                    <View style={styles.imgContainer}>
+                        <Icon name="md-sad-outline" color={Colors.gray} size={50}/>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.notFoundText} >No data for "{cityInputValue}"</Text>
+                    </View>
+                </View>
+            )
+        }
+
+        return (
+            <View style={styles.screen}>
+                <View style={styles.headSearch}>
+                    <Text style={styles.headSearchText}>SEARCH RESULTS</Text>
+                </View>
+                <View>
+                    <FlatList
+                        data={searchedCity}
+                        keyExtractor={item => item.id + ''}
+                        renderItem={itemData => <CitySearchItem city={itemData.item} onSelect={onSelectCityHandler.bind(this)} />}
+                        refreshing={isLoading}
+                        onRefresh={() => fetchCityWeatherByName(cityInputValue)}
+                    />
+                </View>
+            </View>
+        )
+    }
+
     console.log(loadCities)
     return(
         <View style={styles.screen}>
@@ -63,6 +100,12 @@ const CityScreenView = (props) => {
 };
 
 const styles = StyleSheet.create({
+    headSearch: {
+        padding: 10
+    },
+    headSearchText: {
+        fontWeight: 'bold'
+    },
     screen: {
         backgroundColor: Colors.white,
         flex: 1,

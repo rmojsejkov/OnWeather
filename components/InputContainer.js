@@ -1,14 +1,19 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from "react-native";
 import { Icon } from "react-native-elements";
 
-const InputContainer = props => {
+import Colors from '../constants/colors';
 
+const InputContainer = (value, onChangeText = () => '', ...props) => {
     const [enteredCity, setEnteredCity] = useState('');
 
     const cityInputHandler = enteredText => {
         setEnteredCity(enteredText);
     };
+
+    useEffect(() => {
+        onChangeText(enteredCity);
+    }, [enteredCity]);
 
     return(
         <View style={styles.tab}>
@@ -26,6 +31,14 @@ const InputContainer = props => {
                     onChangeText={cityInputHandler}
                     value={enteredCity}
                 />
+                <TouchableWithoutFeedback onPress={() => cityInputHandler('')}>
+                    <Icon
+                        style={{opacity: enteredCity !== '' ? 1 : 0}}
+                        name='cancel'
+                        size={20}
+                        color={Colors.white}
+                    />
+                </TouchableWithoutFeedback>
             </View>
         </View>
     );
@@ -33,20 +46,18 @@ const InputContainer = props => {
 
 const styles = StyleSheet.create({
     inputContainer: {
-        width: '90%',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        borderColor: Colors.whitesmoke,
+        borderWidth: 1,
+        padding: 8,
+        borderRadius: 8,
         flexDirection: 'row',
-        borderWidth: 0.3,
-        borderRadius: 4,
-        margin: 50,
-        marginBottom: 698
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 10
     },
     input: {
         width: '90%',
-        padding: 10,
-        // marginBottom: 10
+        padding: 10
     },
     tab: {
         flex: 2,

@@ -1,4 +1,3 @@
-
 export const DEFAULT_CITIES = [
     {
         name: 'Minsk',
@@ -26,10 +25,10 @@ export const DEFAULT_CITIES = [
     },
     {
         name: 'Zhlobin',
-        id: 625324
+        id: 618806
     },
     {
         name: 'Moscow',
         id: 524901
     },
-]
+];

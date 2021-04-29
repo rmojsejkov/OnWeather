@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     block: {
         flex: 1,
         borderWidth: 1,
-        borderColor: Colors.white,
+        borderColor: Colors.black,
         margin: 10,
         borderRadius: 10
     },
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     titleText: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: 'bold'
     },
     touchable: {

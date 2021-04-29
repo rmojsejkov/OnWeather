@@ -13,7 +13,7 @@ import Colors from '../constants/colors';
 const defaultStackNavOptions = {
     headerStyle: {
         elevation: 0,
-        shadowOpacity:0
+        shadowOpacity:1
     }
 }
 
