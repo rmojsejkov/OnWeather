@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { convertDateFromUTC } from "../../../constants/utils";
 import CityDetails from "./CityDetails";
+import Colors from '../../../constants/colors';
 
 
 const CityDetailsContainer = ({ navigation, route, ...props }) => {
@@ -10,7 +11,11 @@ const CityDetailsContainer = ({ navigation, route, ...props }) => {
     useEffect(() => {
         navigation.setOptions({
             headerTitle: cityName,
-            headerTitleAlign: 'center'
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+                color: Colors.red,
+                fontSize: 24
+            }
         })
     }, []);
     return (

@@ -14,7 +14,8 @@ const defaultStackNavOptions = {
     headerStyle: {
         elevation: 0,
         shadowOpacity:1
-    }
+    },
+    headerTitle: ''
 }
 
 const CityStackNavigation = createStackNavigator();

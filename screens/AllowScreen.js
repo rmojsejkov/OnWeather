@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     },
     notFoundText: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: Colors.red
     },
     textContainer: {
         padding: 10,
@@ -48,8 +49,8 @@ const styles = StyleSheet.create({
         color: Colors.gray
     },
     accessButton: {
-        backgroundColor: Colors.black,
-        borderRadius: 8,
+        backgroundColor: Colors.red,
+        borderRadius: 20,
         overflow: 'hidden',
         paddingVertical: 10,
         paddingHorizontal: 30,

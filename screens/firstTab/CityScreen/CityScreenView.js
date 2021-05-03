@@ -82,7 +82,7 @@ const CityScreenView = (props) => {
         )
     }
 
-    console.log(loadCities)
+    // console.log(loadCities)
     return(
         <View style={styles.screen}>
             <FlatList

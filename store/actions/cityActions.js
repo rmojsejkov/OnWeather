@@ -24,6 +24,34 @@ export const getDefaultCity = () => {
     }
 }
 
+export const getThisCityWeather = () => {
+    return async (dispatch, getState) => {
+        const { thisLocation } = getState().location;
+        let response = await fetch(`${URL}/weather?lat=${thisLocation.lat}&lon=${thisLocation.lon}&appid=${APPID}`);
+        if (!response.ok) {
+            throw new Error("Can't find city on this location.");
+        }
+        const city = await response.json();
+        const thisCityDaily = {
+            id: city.id,
+            city: city.name
+        }
+        response = await fetch(`${URL}/onecall?lat=${thisLocation.lat}&lon=${thisLocation.lon}&exclude=current,minutely,alerts&appid=${APPID}`);
+        if (!response.ok) {
+            throw new Error("Can't fetch data on this location.");
+        }
+        const { daily, hourly } = await response.json();
+        dispatch({
+            type: CITIES.SET_CURRENT_CITY_WEATHER,
+            payload: {
+                ...thisCityDaily,
+                daily,
+                hourly
+            }
+        })
+    }
+}
+
 export const getCityInCircleWeather = cityCount => {
     return async (dispatch, getState) => {
         dispatch(clearCity());

@@ -1,3 +1,3 @@
-import DailyScreen from "./DailyScreen";
+import DailyScreen from "./DailyScreenContainer";
 
 export { DailyScreen };

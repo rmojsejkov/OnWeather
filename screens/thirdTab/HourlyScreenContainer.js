@@ -1,12 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import * as FileSystem from 'expo-file-system';
 
+
+import { convertDateFromUTC, dayFormatter, MONTHS } from "../../constants/utils";
 import { cityActions, locationActions } from "../../store/actions";
-import DailyScreen from "./DailyScreen";
+import HourlyScreen from "./HourlyScreen";
 
 
-const DailyScreenContainer = ({ navigation, ...props }) => {
+const HourlyScreenContainer = ({ navigation, route, ...props }) => {
+
     const [isLoading, setIsLoading] = useState(false);
     const thisLocation = useSelector(state => state.location.thisLocation);
     const currentCityWeather = useSelector(state => state.city.currentCityWeather);
@@ -39,9 +43,14 @@ const DailyScreenContainer = ({ navigation, ...props }) => {
     useEffect(() => {
         if (!currentCityWeather) {
             loadWeather();
+            return;
         }
+        const getDate = () => {
+            return convertDateFromUTC(currentCityWeather.hourly[0].dt)
+        };
+        const title = `${currentCityWeather.city} - ${MONTHS[getDate().getMonth()]}, ${dayFormatter(getDate().getDate())}`;
         navigation.setOptions({
-            headerTitle: currentCityWeather ? currentCityWeather.city : '',
+            headerTitle: currentCityWeather ? title : '',
             headerTitleStyle: {
                 fontSize: 28
             }
@@ -50,11 +59,16 @@ const DailyScreenContainer = ({ navigation, ...props }) => {
 
     useEffect(() => {
         let unsubscribeTabPress;
-        const unsubscribeBlur = navigation.dangerouslyGetParent()
+        const unsubscribeBlur = navigation
             .addListener('blur', () => {
                 if (unsubscribeTabPress) {
                     unsubscribeTabPress();
                 }
+            });
+        const unsubscribeFocusTopTab = navigation
+            .addListener('focus', () => {
+                loadWeather();
+
             });
         const unsubscribeFocus = navigation.dangerouslyGetParent()
             .addListener('focus', () => {
@@ -66,19 +80,19 @@ const DailyScreenContainer = ({ navigation, ...props }) => {
         return () => {
             unsubscribeBlur();
             unsubscribeFocus();
+            unsubscribeFocusTopTab();
         }
     }, [navigation]);
 
-
     return (
-        <DailyScreen
+        <HourlyScreen
             isLoading={isLoading}
-            thisLocation={thisLocation}
             currentCityWeather={currentCityWeather}
-            allowHandler={allowHandler}
+            thisLocation={thisLocation}
             loadWeather={loadWeather}
+            allowHandler={allowHandler}
         />
     )
 };
 
-export default DailyScreenContainer;
+export default HourlyScreenContainer;

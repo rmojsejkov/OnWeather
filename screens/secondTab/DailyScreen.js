@@ -1,7 +1,7 @@
 import React from "react";
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList, View, StyleSheet } from "react-native";
 
-import { DailyItem } from "../../../components";
+import { DailyBlock } from "../../components";
 import AllowScreen from "../AllowScreen";
 import Colors from "../../constants/colors";
 
@@ -9,7 +9,7 @@ import Colors from "../../constants/colors";
 const DailyScreen = ({navigation, ...props}) => {
     const {
         isLoading,
-        currentLocation,
+        thisLocation,
         currentCityWeather,
         allowHandler,
         loadWeather
@@ -19,12 +19,12 @@ const DailyScreen = ({navigation, ...props}) => {
     if (isLoading) {
         return (
             <View style={{...styles.screen, justifyContent: 'center', alignItems: 'center'}}>
-                <ActivityIndicator size='large' color={Colors.primary} />
+                <ActivityIndicator size='large' color={Colors.red} />
             </View>
         )
     }
 
-    if (!currentLocation) {
+    if (!thisLocation) {
         return (
             <AllowScreen allowHandler={allowHandler} />
         )
@@ -33,7 +33,7 @@ const DailyScreen = ({navigation, ...props}) => {
     if (!currentCityWeather) {
         return (
             <View style={{...styles.screen, justifyContent: 'center', alignItems: 'center'}}>
-                <ActivityIndicator size='large' color={Colors.primary} />
+                <ActivityIndicator size='large' color={Colors.red} />
             </View>
         )
     }
@@ -43,12 +43,49 @@ const DailyScreen = ({navigation, ...props}) => {
             <FlatList
                 data={currentCityWeather.daily}
                 keyExtractor={item => item.dt + ''}
-                renderItem={itemData => <DailyItem daily={itemData.item} />}
+                renderItem={itemData => <DailyBlock daily={itemData.item} />}
                 refreshing={isLoading}
                 onRefresh={() => loadWeather()}
             />
         </View>
     )
 };
+
+const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        backgroundColor: Colors.white
+    },
+    imgContainer: {
+        backgroundColor: Colors.lightgray,
+        padding: 40,
+        borderRadius: 80,
+        marginBottom: 50
+    },
+    notFoundText: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    textContainer: {
+        padding: 10,
+        justifyContent: 'space-between',
+        alignItems: "center",
+        height: 80,
+    },
+    messageText: {
+        color: Colors.gray
+    },
+    accessButton: {
+        backgroundColor: Colors.black,
+        borderRadius: 8,
+        overflow: 'hidden',
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+        marginTop: 20
+    },
+    accessButtonText: {
+        color: Colors.white,
+    }
+});
 
 export default DailyScreen;

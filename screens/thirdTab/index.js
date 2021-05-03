@@ -1,3 +1,3 @@
-import HourlyScreen from "./HourlyScreen";
+import HourlyScreen from "./HourlyScreenContainer";
 
 export { HourlyScreen };

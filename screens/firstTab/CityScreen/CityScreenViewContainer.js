@@ -22,7 +22,7 @@ const CityScreenContainer = ({navigation, ...props}) => {
     const dispatch = useDispatch();
 
     const fetchCityWeatherByName = useCallback(async (text) => {
-        console.log(text);
+        // console.log(text);
         setIsSearching(true);
         setIsLoading(true);
         try {
