@@ -1,3 +1,3 @@
-import CityDetails from "./CityDetails";
+import CityDetails from "./CityDetailsContainer";
 
 export { CityDetails };

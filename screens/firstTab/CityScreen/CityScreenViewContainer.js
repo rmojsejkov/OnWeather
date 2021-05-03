@@ -22,6 +22,7 @@ const CityScreenContainer = ({navigation, ...props}) => {
     const dispatch = useDispatch();
 
     const fetchCityWeatherByName = useCallback(async (text) => {
+        console.log(text);
         setIsSearching(true);
         setIsLoading(true);
         try {
@@ -46,6 +47,17 @@ const CityScreenContainer = ({navigation, ...props}) => {
         }
         setIsSearching(false);
     };
+
+    const CitySelectHandler = city => {
+        navigation.navigate('CityDetails', {
+            cityId: city.id,
+            cityName: city.name,
+            cityDt: city.dt,
+            cityTemp: city.main.temp,
+            cityWeather: city.weather[0].main,
+            weatherIcon: city.weather[0].icon
+        })
+    }
 
     const loadCities = useCallback(async () => {
         setIsLoading(true);
@@ -89,7 +101,7 @@ const CityScreenContainer = ({navigation, ...props}) => {
             fetchCityWeatherByName={fetchCityWeatherByName}
             cityInputValue={cityInputValue}
             isSearching={isSearching}
-
+            CitySelectHandler={CitySelectHandler}
         />
     )
 }

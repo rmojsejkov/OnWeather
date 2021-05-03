@@ -14,7 +14,6 @@ const CityBlockItem = ({city, onSelect, ...props}) => {
     return(
         <Block style={styles.block}>
             <View style={styles.touchable}>
-                {/*<TouchableComponent onPress={() => ({})}>*/}
                 <TouchableComponent onPress={() => onSelect(city)}>
                     <View>
                         <View style={styles.title}>

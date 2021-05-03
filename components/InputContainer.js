@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, TextInput, TouchableWithoutFeedback } from "react-native";
 import { Icon } from "react-native-elements";
 
 import Colors from '../constants/colors';
 
-const InputContainer = (value, onChangeText = () => '', ...props) => {
-    const [enteredCity, setEnteredCity] = useState('');
+const InputContainer = ({value, onChangeText = () => '', ...props}) => {
+    const [enteredCity, setEnteredCity] = useState(value || '');
 
     const cityInputHandler = enteredText => {
         setEnteredCity(enteredText);
@@ -14,6 +14,7 @@ const InputContainer = (value, onChangeText = () => '', ...props) => {
     useEffect(() => {
         onChangeText(enteredCity);
     }, [enteredCity]);
+    console.log(value)
 
     return(
         <View style={styles.tab}>
@@ -36,7 +37,7 @@ const InputContainer = (value, onChangeText = () => '', ...props) => {
                         style={{opacity: enteredCity !== '' ? 1 : 0}}
                         name='cancel'
                         size={20}
-                        color={Colors.white}
+                        color={Colors.black}
                     />
                 </TouchableWithoutFeedback>
             </View>
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         borderColor: Colors.whitesmoke,
         borderWidth: 1,
-        padding: 8,
+        padding: 0.1,
         borderRadius: 8,
         flexDirection: 'row',
         alignItems: 'center',

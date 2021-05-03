@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import {Text, View, StyleSheet, FlatList, Button, ActivityIndicator} from 'react-native';
 
-import { CityBlockItem, InputContainer } from '../../../components';
+import { CityBlockItem, InputContainer, CityInputItem } from '../../../components';
 import Colors from '../../../constants/colors';
-import { Icon } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
 
 const CityScreenView = (props) => {
-
     const {
         error,
         navigation,
@@ -17,11 +16,9 @@ const CityScreenView = (props) => {
         textHandler,
         searchedCity,
         fetchCityWeatherByName,
-        isSearching
+        isSearching,
+        CitySelectHandler
     } = props;
-
-    navigation.setOptions = () => {
-    }
 
     useEffect(() => {
         navigation.setOptions({
@@ -54,10 +51,11 @@ const CityScreenView = (props) => {
 
     if (isSearching && cityInputValue.trim().length > 3) {
         if (searchedCity.length === 0) {
+            console.log(searchedCity.length)
             return (
                 <View style={styles.notFoundScreen}>
                     <View style={styles.imgContainer}>
-                        <Icon name="md-sad-outline" color={Colors.gray} size={50}/>
+                        <Ionicons name='md-sad-outline' color={Colors.black} size={50}/>
                     </View>
                     <View style={styles.textContainer}>
                         <Text style={styles.notFoundText} >No data for "{cityInputValue}"</Text>
@@ -75,7 +73,7 @@ const CityScreenView = (props) => {
                     <FlatList
                         data={searchedCity}
                         keyExtractor={item => item.id + ''}
-                        renderItem={itemData => <CitySearchItem city={itemData.item} onSelect={onSelectCityHandler.bind(this)} />}
+                        renderItem={itemData => <CityInputItem city={itemData.item} onSelect={CitySelectHandler.bind(this)} />}
                         refreshing={isLoading}
                         onRefresh={() => fetchCityWeatherByName(cityInputValue)}
                     />
@@ -91,7 +89,7 @@ const CityScreenView = (props) => {
                 data={citiesWeather}
                 keyExtractor={item => item.id + ''}
                 numColumns={2}
-                renderItem={itemData => <CityBlockItem city={itemData.item} onSelect={ () => ({}) } />}
+                renderItem={itemData => <CityBlockItem city={itemData.item} onSelect={CitySelectHandler.bind(this)} />}
                 refreshing={isLoading}
                 onRefresh={() => loadCities()}
             />
@@ -110,6 +108,24 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         flex: 1,
         paddingHorizontal: 5
+    },
+    notFoundScreen: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.white
+    },
+    imgContainer: {
+        backgroundColor: Colors.lightgray,
+        padding: 40,
+        borderRadius: 80
+    },
+    notFoundText: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    textContainer: {
+        padding: 10
     }
 });
 
