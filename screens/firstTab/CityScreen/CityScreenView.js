@@ -51,7 +51,7 @@ const CityScreenView = (props) => {
 
     if (isSearching && cityInputValue.trim().length > 3) {
         if (searchedCity.length === 0) {
-            console.log(searchedCity.length)
+            console.log(cityInputValue)
             return (
                 <View style={styles.notFoundScreen}>
                     <View style={styles.imgContainer}>

@@ -76,6 +76,7 @@ export const getCityInCircleWeather = cityCount => {
 
 export const getCityWeatherByName = cityName => {
     return async dispatch => {
+        console.log('by name ' + cityName)
         const response = await fetch(`${URL}/find?q=${cityName}&appid=${APPID}`);
         if (!response.ok) {
             throw new Error("Can't fetch cities by name");

@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 import { TouchableComponent, CityWeatherIcon } from './ui';
-import { Block } from '../components';
+import Block from '../components/Block';
 import Colors from '../constants/colors';
 import { toTempFormatter } from "../constants/utils";
 
