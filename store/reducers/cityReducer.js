@@ -3,7 +3,9 @@ import { CITIES } from "../../constants/types";
 const initialState = {
     citiesWeather: [],
     currentCityWeather: null,
-    searchedCity: []
+    searchedCity: [],
+    thisCityWeatherYesterday: null
+
 }
 
 
@@ -19,6 +21,13 @@ const handlers = {
     [CITIES.GET_CITIES_WEATHER_BY_NAME]: (state, {payload}) => ({
         ...state,
         searchedCity: payload
+    }),
+    [CITIES.SET_WEATHER_YESTERDAY]: (state, {payload}) => ({
+        ...state,
+        thisCityWeatherYesterday: {
+            ...state.currentCityWeather,
+            hourly: payload
+        }
     }),
     DEFAULT: state => state
 }

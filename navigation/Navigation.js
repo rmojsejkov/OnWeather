@@ -3,19 +3,20 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import { CityScreen, CityDetails } from '../screens/firstTab'
 import { DailyScreen } from '../screens/secondTab';
-import { HourlyScreen } from '../screens/thirdTab';
+import {HourlyYesterday, HourlyToday} from '../screens/thirdTab/';
 import Colors from '../constants/colors';
 
 
 const defaultStackNavOptions = {
     headerStyle: {
+        headerTitle: '',
         elevation: 0,
         shadowOpacity:1
     },
-    headerTitle: ''
 }
 
 const CityStackNavigation = createStackNavigator();
@@ -52,16 +53,21 @@ const DailyNavigation = () => {
     );
 };
 
-const HourlyStackNavigation = createStackNavigator();
+const HourlyStackNavigation = createMaterialTopTabNavigator();
 
 const HourlyNavigation = () => {
     return(
         <HourlyStackNavigation.Navigator
             screenOptions={defaultStackNavOptions}
+            
         >
             <HourlyStackNavigation.Screen
-                name="Hourly"
-                component={HourlyScreen}
+                name="HourlyToday"
+                component={HourlyToday}
+            />
+            <HourlyStackNavigation.Screen
+                name="HourlyYesterday"
+                component={HourlyYesterday}
             />
         </HourlyStackNavigation.Navigator>
     );
