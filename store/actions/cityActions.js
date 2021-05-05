@@ -36,6 +36,7 @@ export const getThisCityWeather = () => {
             id: city.id,
             city: city.name
         }
+
         response = await fetch(`${URL}/onecall?lat=${thisLocation.lat}&lon=${thisLocation.lon}&exclude=current,minutely,alerts&appid=${APPID}`);
         if (!response.ok) {
             throw new Error("Can't fetch data on this location.");
@@ -54,11 +55,12 @@ export const getThisCityWeather = () => {
 
 export const getThisCityWeatherYesterday = () => {
     return async (dispatch, getState) => {
+
         const { thisLocation } = getState().location;
-        const { thisCityWeather } = getState().city;
+        const { currentCityWeather: thisCityWeather } = getState().city;
         const currentDate = new Date();
 
-        console.log('fetch');
+
         const yesterdayDt = Math.floor((Date.now() - 86400000)/1000);
         const response = await fetch(`${URL}/onecall/timemachine?lat=${thisLocation.lat}&lon=${thisLocation.lon}&dt=${yesterdayDt}&appid=${APPID}`);
         if (!response.ok) {
@@ -66,19 +68,15 @@ export const getThisCityWeatherYesterday = () => {
         }
         const { hourly } = await response.json();
         const prevDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 1);
-        const yesterdayCityHourly = {
-            date: prevDate,
-            city: thisCityWeather.city,
-            hourly
-        };
+        // const yesterdayCityHourly = {
+        //     date: prevDate,
+        //     city: thisCityWeather.city,
+        //     hourly
+        // };
 
-        console.log('write');
         dispatch({
             type: CITIES.SET_WEATHER_YESTERDAY,
-            payload: {
-                ...yesterdayCityHourly,
-                hourly
-            }
+            payload: hourly
         })
     }
 }

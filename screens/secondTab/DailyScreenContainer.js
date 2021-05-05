@@ -44,7 +44,7 @@ const DailyScreenContainer = ({ navigation, ...props }) => {
             headerTitle: currentCityWeather ? currentCityWeather.city : '',
             headerTitleStyle: {
                 fontSize: 28
-            }
+            },
         });
     }, [currentCityWeather]);
 

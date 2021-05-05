@@ -5,11 +5,11 @@ import { cityActions } from '../../store/actions';
 import HourlyScreenContainer from "./HourlyScreenContainer";
 const HourlyScreenYesterday = props => {
 
-    const thisCityWeatherYesterday = (useSelector(state => state.city.thisCityWeather))
+    const thisCityWeatherYesterday = (useSelector(state => state.city.thisCityWeatherYesterday));
     return(
         <HourlyScreenContainer
             thisCityWeather={thisCityWeatherYesterday}
-            loadWeatherAction={cityActions.getThisCityWeatherYesterday()}
+            loadWeatherAction={cityActions.getThisCityWeatherYesterday}
             {...props}
         />
     );

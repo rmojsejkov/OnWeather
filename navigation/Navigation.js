@@ -13,9 +13,9 @@ import Colors from '../constants/colors';
 
 const defaultStackNavOptions = {
     headerStyle: {
-        headerTitle: '',
+        // headerTitle: '',
         elevation: 0,
-        shadowOpacity:1
+        shadowOpacity: 0
     },
 }
 
@@ -55,21 +55,60 @@ const DailyNavigation = () => {
 
 const HourlyStackNavigation = createMaterialTopTabNavigator();
 
-const HourlyNavigation = () => {
+const HourlyStackNavigator = () => {
+
     return(
         <HourlyStackNavigation.Navigator
             screenOptions={defaultStackNavOptions}
-            
+            style={{
+                backgroundColor: 'white',
+                elevation: 0,
+                shadowWidth: 0
+
+            }}
+            tabBarOptions={{
+                // activeTintColor: Colors.black,
+                // inactiveTintColor: 'gray',
+                style: {
+                    width: '60%',
+                    alignSelf: 'center',
+                    elevation: 0
+                }
+            }}
         >
             <HourlyStackNavigation.Screen
-                name="HourlyToday"
+                name="Today"
                 component={HourlyToday}
             />
             <HourlyStackNavigation.Screen
-                name="HourlyYesterday"
+                name="Yesterday"
                 component={HourlyYesterday}
             />
         </HourlyStackNavigation.Navigator>
+    );
+};
+
+const HourlyNavigator = createStackNavigator();
+
+const HourlyNavigation = () => {
+    const styleHourly = {
+        headerStyle: {
+            elevation: 0,
+            shadowOpacity: 1
+        }
+    }
+    return(
+        <HourlyNavigator.Navigator
+            screenOptions={styleHourly}
+        >
+            <HourlyNavigator.Screen
+                name="Hourly"
+                component={HourlyStackNavigator}
+                options={{
+                    headerTitle: ''
+                }}
+            />
+        </HourlyNavigator.Navigator>
     );
 };
 

@@ -11,9 +11,13 @@ import HourlyScreen from "./HourlyScreen";
 
 const HourlyScreenContainer = ({ navigation, route, ...props }) => {
 
+    const {
+        thisCityWeather:currentCityWeather,
+        loadWeatherAction
+    } = props;
+
     const [isLoading, setIsLoading] = useState(false);
     const thisLocation = useSelector(state => state.location.thisLocation);
-    const currentCityWeather = useSelector(state => state.city.currentCityWeather);
     const dispatch = useDispatch();
 
     const allowHandler = useCallback(async () => {
@@ -33,7 +37,7 @@ const HourlyScreenContainer = ({ navigation, route, ...props }) => {
             if (!thisLocation) {
                 await dispatch(locationActions.getThisLocation());
             }
-            await dispatch(cityActions.getThisCityWeather());
+            await dispatch(loadWeatherAction());
         } catch (err) {
             console.log(err.message);
         }
@@ -49,7 +53,7 @@ const HourlyScreenContainer = ({ navigation, route, ...props }) => {
             return convertDateFromUTC(currentCityWeather.hourly[0].dt)
         };
         const title = `${currentCityWeather.city} - ${MONTHS[getDate().getMonth()]}, ${dayFormatter(getDate().getDate())}`;
-        navigation.setOptions({
+        navigation.dangerouslyGetParent().setOptions({
             headerTitle: currentCityWeather ? title : '',
             headerTitleStyle: {
                 fontSize: 28
