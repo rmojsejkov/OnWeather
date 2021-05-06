@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import Color from '../constants/colors';
+import Color from '../../constants/colors';
 
 const Block = props => {
     return(

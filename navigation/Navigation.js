@@ -61,7 +61,7 @@ const HourlyStackNavigator = () => {
         <HourlyStackNavigation.Navigator
             screenOptions={defaultStackNavOptions}
             style={{
-                backgroundColor: 'white',
+                backgroundColor: Colors.white,
                 elevation: 0,
                 shadowWidth: 0
 

@@ -5,6 +5,8 @@ import { HourlyBlock } from "../../components";
 import AllowScreen from "../AllowScreen";
 import Colors from "../../constants/colors";
 import {convertDateFromUTC} from "../../constants/utils";
+import { CustomButtonWeather } from '../../components';
+import ButtonSheetItem from "../../components/ButtonSheetItem";
 
 
 const HourlyScreen = ({navigation, ...props}) => {
@@ -24,6 +26,7 @@ const HourlyScreen = ({navigation, ...props}) => {
             </View>
         )
     }
+
 
     if (!thisLocation) {
         return (
@@ -51,13 +54,14 @@ const HourlyScreen = ({navigation, ...props}) => {
                 refreshing={isLoading}
                 onRefresh={() => loadWeather()}
             />
+            <CustomButtonWeather />
         </View>
     )
 };
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
+        flex: 2,
         backgroundColor: Colors.white
     },
     imgContainer: {
@@ -89,6 +93,13 @@ const styles = StyleSheet.create({
     },
     accessButtonText: {
         color: Colors.white,
+    },
+    customButton: {
+        position: 'absolute',
+        overflow: 'hidden',
+        width: '30%',
+        backgroundColor: Colors.red
+
     }
 });
 

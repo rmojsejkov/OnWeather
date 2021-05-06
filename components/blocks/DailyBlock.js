@@ -1,25 +1,26 @@
 import React from "react";
 import { View, Text, StyleSheet } from 'react-native';
 
-import { convertDateFromUTC, toTempFormatter, toTimeFormat, MONTHS } from "../constants/utils";
-import { CityWeatherIcon } from '../components/ui';
+import { convertDateFromUTC, toTempFormatter, dayFormatter, MONTHS } from "../../constants/utils";
+import { CityWeatherIcon } from '../ui';
 
-const HourlyBlock = ({hour, ...props}) => {
-    const temp = toTempFormatter(hour.temp);
-    const date = convertDateFromUTC(hour.dt);
+const DailyBlock = ({daily, ...props}) => {
+    console.log(daily)
+    const temp = toTempFormatter(daily.temp.day);
+    const date = convertDateFromUTC(daily.dt);
     return(
         <View style={styles.item}>
             <View style={styles.mainContainer}>
                 <View style={styles.leftContainer}>
                     <View style={styles.title}>
-                        <Text style={styles.titleText}>{toTimeFormat(date.getHours(), date.getMinutes())}</Text>
+                        <Text style={styles.titleText}>{MONTHS[date.getMonth()]}, {dayFormatter(date.getDate())}</Text>
                     </View>
                     <View style={styles.temp}>
                         <Text>{temp} С</Text>
                     </View>
                 </View>
-                <View>
-                    <CityWeatherIcon iconName={hour.weather[0].icon} />
+                <View style={styles.rightContainer}>
+                    <CityWeatherIcon iconName={daily.weather[0].icon} />
                 </View>
             </View>
         </View>
@@ -59,4 +60,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default HourlyBlock;
+export default DailyBlock;

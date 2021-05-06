@@ -5,10 +5,10 @@ import {
     StyleSheet
 } from 'react-native';
 
-import { TouchableComponent, CityWeatherIcon } from './ui';
-import Block from '../components/Block';
-import Colors from '../constants/colors';
-import { toTempFormatter } from "../constants/utils";
+import { TouchableComponent, CityWeatherIcon } from '../ui';
+import Block from './Block';
+import Colors from '../../constants/colors';
+import { toTempFormatter } from "../../constants/utils";
 
 const CityBlockItem = ({city, onSelect, ...props}) => {
     return(
